@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padel Club | Бронирование кортов</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #0d0f12;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(22, 25, 30, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2d3440;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: #bcff00;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #8a94a6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #bcff00;
+        }
+
+        .btn {
+            background-color: #bcff00;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #a3dc00;
+            box-shadow: 0 4px 20px rgba(188, 255, 0, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #2d3440;
+        }
+
+        .btn-outline:hover {
+            background-color: #22272f;
+        }
+
+        section {
+            padding: 8rem 2rem 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: #bcff00;
+        }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            color: #8a94a6;
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-graphic {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ball-icon {
+            font-size: 8rem;
+            background: radial-gradient(circle, #bcff00 0%, #0d0f12 70%);
+            padding: 2rem;
+            border-radius: 50%;
+            animation: bounce 2s infinite alternate;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        /* Features */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: #16191e;
+            border: 1px solid #2d3440;
+            padding: 2rem;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-color: #bcff00;
+        }
+
+        .card h3 {
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.25rem;
+        }
+
+        .card p {
+            color: #8a94a6;
+        }
+
+        /* Booking Form */
+        .booking-box {
+            background-color: #16191e;
+            border: 1px solid #2d3440;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 1rem;
+            background-color: #22272f;
+            border: 1px solid #2d3440;
+            color: #ffffff;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        select:focus, input:focus {
+            border-color: #bcff00;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .time-tab {
+            background-color: #22272f;
+            border: 1px solid #2d3440;
+            color: #ffffff;
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .time-tab:hover {
+            border-color: #bcff00;
+        }
+
+        .time-tab.active {
+            background-color: #bcff00;
+            color: #000000;
+            border-color: #bcff00;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .modal-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-window {
+            background-color: #16191e;
+            border: 1px solid #2d3440;
+            padding: 2.5rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .modal-window h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .info-summary {
+            background-color: #22272f;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: left;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-summary div {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">Padel<span>Club</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">О клубе</a></li>
+                <li><a href="#services">Тарифы</a></li>
+                <li><a href="#booking">Бронирование</a></li>
+            </ul>
+            <a href="#booking" class="btn">Играть</a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Играй в Падл на кортах премиум-класса</h1>
+            <p>Современные панорамные корты, аренда лучшего инвентаря и топовые тренеры в одном месте.</p>
+            <a href="#booking" class="btn">Забронировать корт</a>
+        </div>
+        <div class="hero-graphic">
+            <div class="ball-icon">🎾</div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Наши <span>Преимущества</span></h2>
+        <div class="grid">
+            <div class="card">
+                <h2>🏟️</h2>
+                <h3>Евро-покрытие</h3>
+                <p>Профессиональные корты с панорамным остеклением и идеальным светом.</p>
+            </div>
+            <div class="card">
+                <h2>🎒</h2>
+                <h3>Прокат ракеток</h3>
+                <p>Новое оборудование от мировых брендов уже ждет вас на ресепшене.</p>
+            </div>
+            <div class="card">
+                <h2>🏅</h2>
+                <h3>Академия</h3>
+                <p>Индивидуальные программы тренировок для любого уровня подготовки.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Наши <span>Тарифы</span></h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Аренда корта</h3>
+                <p style="font-size: 1.75rem; font-weight: bold; margin: 1rem 0; color: #bcff00;">2 400 ₽ / ч</p>
+                <p>До 4-х игроков на корте. Доступ в раздевалки включен.</p>
+                <button class="btn btn-outline" style="width:100%; margin-top:1.5rem;" onclick="selectService('Аренда корта')">Выбрать</button>
+            </div>
+            <div class="card" style="border-color: #bcff00;">
+                <h3>Сплит-тренировка</h3>
+                <p style="font-size: 1.75rem; font-weight: bold; margin: 1rem 0; color: #bcff00;">4 500 ₽ / ч</p>
+                <p>Занятие с тренером для двоих человек. Инвентарь включен.</p>
+                <button class="btn" style="width:100%; margin-top:1.5rem;" onclick="selectService('Сплит-тренировка')">Выбрать</button>
+            </div>
+            <div class="card">
+                <h3>Индивидуальная</h3>
